@@ -7,11 +7,11 @@ class Details extends Component {
      * Takes in props, which should take in a number representing the id of a movie. 
      * @param {*} props 
      */
-    constructor(props) {
+    constructor (props) {
         super(props)
     }
 
-    render() {
+    render () {
         return (
             <div className="description-box">
                 <div className="center-horizontal-box">
