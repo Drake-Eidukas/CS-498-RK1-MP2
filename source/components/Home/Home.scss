@@ -1,8 +1,27 @@
+// Dimensions
+$app-padding: 36px;
+$app-outer-radius: 16px;
+
+// Colors
+$white: #FFFFFF;
+$white-smoke: 	#F5F5F5;
+$dark-gray: #3D3D3D;
+$black: #000000;
+$flamenco: #FF7B05;
+$spring-green: #05FF5B;
+$shamrock: #26C09D;
+$electric-violet: #DA0CED;
+$selected-pastel-navy: #283342;
+$background-pastel-navy: #232f3e;
+$selected-orange: #f8991d;
+
 .Home {
-    color: skyblue;
+    background: $white-smoke;
     text-align: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: $app-outer-radius;
+    padding: $app-padding;
 }

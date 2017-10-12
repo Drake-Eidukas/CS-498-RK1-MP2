@@ -4,41 +4,28 @@ import { Link } from 'react-router-dom'
 
 import styles from './Home.scss'
 
-import MovieFetcher from '../../assets/MovieFetcher'
-import Details from '../Detail/Details.jsx'
-import DetailNavigationBar from '../Detail/DetailNavigationBar.jsx'
-import { Genres } from '../../assets/Genres'
+import MovieRequest from '../../assets/MovieRequest'
+import Genres from '../../assets/Genres'
+import DetailPane from '../Detail/DetailPane.jsx'
+
 
 class Home extends Component {
-  render () {
-    let m = new MovieFetcher('70f874b8df6b617b38ea97652636d663')
-    m.getMovieById(211672).then((response) => {
-      console.log(response)
-    }).catch((err) => {
-      console.log(err)
-    })
+    render () {
+        console.log(MovieRequest)
+        let m = new MovieRequest('70f874b8df6b617b38ea97652636d663')
 
-    render() {
-//         let m = new MovieFetcher('70f874b8df6b617b38ea97652636d663', {
-//             base_url: '/user/12345',
-//             data: {
-//                 firstName: 'Fred',
-//                 lastName: 'Flintstone'
-//   }
-//         });
-//         m.searchMovies({
-//             url: "/movie",
-//             method: "get"},
-//             {
-//                 "language": "en-us",
-//                 "query": "hot fuzz"
-//             }
-//         );
-        return(
+        m.getMovieById(211672).then((response) => {
+            this.title = response.data.original_title
+            this.description = response.data.overview
+            this.imagesrc = response.data.
+            console.log(response)
+        }).catch((err) => {
+            console.log(err)
+        })
+
+        return (
             <div className="Home">
-                <h1>Welcome to MP2!</h1>
-                <DetailNavigationBar/>
-                <Details MovieDescription="desc" MovieTitle="title" MovieImageSrc="https://i.pinimg.com/736x/c5/e8/77/c5e877889a1fea74b5fe02c4003f71a9--teaching-memes-funny-teachers-in-may-meme.jpg"/>
+                <DetailPane MovieDescription="desc" MovieTitle="title" MovieImageSrc="https://i.pinimg.com/736x/c5/e8/77/c5e877889a1fea74b5fe02c4003f71a9--teaching-memes-funny-teachers-in-may-meme.jpg"/>
             </div>
         )
     }
