@@ -4,7 +4,8 @@ import { Button } from 'semantic-ui-react'
 import {
   HashRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom'
 
 import styles from '../../styles/Home/Home.scss'
@@ -17,7 +18,7 @@ class Home extends Component {
     super(props)
 
     this.state = {
-      movieIdList: [10555, 10556]
+      movieIdList: [10555, 10556, 10557]
     }
 
     this.onNext = this.onNext.bind(this)
@@ -25,20 +26,27 @@ class Home extends Component {
   }
 
   onNext (id) {
-    if (this.state.movieIdList.indexOf(id) === -1) {
-      // window.URL.
+    let currIndex = this.state.movieIdList.indexOf(parseInt(id))
+
+    if (currIndex === -1) {
+      window.location.href = '/search'
+    } else {
+      window.location.href = `/#/detail/${this.state.movieIdList[(currIndex + 1) % this.state.movieIdList.length]}`
     }
-    this.setState({
-      currentMovieIndex: (this.state.currentMovieIndex + 1) % this.state.movieIdList.length
-    })
   }
 
   onPrevious (id) {
-    let nextIndex = (this.state.currentMovieIndex - 1) % this.state.movieIdList.length
-    if (nextIndex < 0) { nextIndex += this.state.movieIdList.length }
-    this.setState({
-      currentMovieIndex: nextIndex
-    })
+    let currIndex = this.state.movieIdList.indexOf(parseInt(id))
+    
+    if (currIndex === -1) {
+      window.location.href = '/search'
+      return 
+    } else if (currIndex === 0) {
+      currIndex = this.state.movieIdList.length - 1
+    } else {
+      currIndex -= 1
+    }
+      window.location.href = `/#/detail/${this.state.movieIdList[currIndex]}`
   }
 
   render () {
@@ -51,6 +59,9 @@ class Home extends Component {
             <Button icon='grid layout' content='Gallery' size='massive' as={Link} to={'/gallery'} />
           </Button.Group>
 
+          <Route exact path='/' render={()=>{
+            return <Redirect to='/search'/>
+          }} />
           <Route path='/search' component={() => { return <p>searchy boye</p> }} />
 
           <Route path='/gallery' component={() => { return <p>gallery boye</p> }} />
