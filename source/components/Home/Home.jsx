@@ -11,7 +11,6 @@ import styles from '../../styles/Home/Home.scss'
 
 import Genres from '../../assets/Genres'
 import DetailPane from '../Detail/DetailPane.jsx'
-import RoutingPane from '../Routing/RoutingPane.jsx'
 
 class Home extends Component {
   constructor (props) {
