@@ -12,7 +12,7 @@ import Home from './components/Home/Home.jsx';
 require('./styles/main.scss');
 
 render(
-    <Home />,
+    <Home DefaultMovieId='3'/>,
     // Define your router and replace <Home /> with it!
     document.getElementById('app')
 );

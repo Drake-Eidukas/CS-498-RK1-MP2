@@ -1,34 +1,69 @@
 import React, { Component } from 'react'
 import { Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 
-import styles from './Home.scss'
+import {
+  HashRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
-import MovieRequest from '../../assets/MovieRequest'
+import styles from '../../styles/Home/Home.scss'
+
 import Genres from '../../assets/Genres'
 import DetailPane from '../Detail/DetailPane.jsx'
-
+import RoutingPane from '../Routing/RoutingPane.jsx'
 
 class Home extends Component {
-    render () {
-        console.log(MovieRequest)
-        let m = new MovieRequest('70f874b8df6b617b38ea97652636d663')
+  constructor (props) {
+    super(props)
 
-        m.getMovieById(211672).then((response) => {
-            this.title = response.data.original_title
-            this.description = response.data.overview
-            this.imagesrc = response.data.
-            console.log(response)
-        }).catch((err) => {
-            console.log(err)
-        })
-
-        return (
-            <div className="Home">
-                <DetailPane MovieDescription="desc" MovieTitle="title" MovieImageSrc="https://i.pinimg.com/736x/c5/e8/77/c5e877889a1fea74b5fe02c4003f71a9--teaching-memes-funny-teachers-in-may-meme.jpg"/>
-            </div>
-        )
+    this.state = {
+      movieIdList: [10555, 10556]
     }
+
+    this.onNext = this.onNext.bind(this)
+    this.onPrevious = this.onPrevious.bind(this)
+  }
+
+  onNext (id) {
+    if (this.state.movieIdList.indexOf(id) === -1) {
+      // window.URL.
+    }
+    this.setState({
+      currentMovieIndex: (this.state.currentMovieIndex + 1) % this.state.movieIdList.length
+    })
+  }
+
+  onPrevious (id) {
+    let nextIndex = (this.state.currentMovieIndex - 1) % this.state.movieIdList.length
+    if (nextIndex < 0) { nextIndex += this.state.movieIdList.length }
+    this.setState({
+      currentMovieIndex: nextIndex
+    })
+  }
+
+  render () {
+    return (
+      <Router className='routing-pane'>
+        <div className='Home'>
+
+          <Button.Group labeled fluid>
+            <Button icon='search' content='Search' size='massive' as={Link} to='/search' />
+            <Button icon='grid layout' content='Gallery' size='massive' as={Link} to={'/gallery'} />
+          </Button.Group>
+
+          <Route path='/search' component={() => { return <p>searchy boye</p> }} />
+
+          <Route path='/gallery' component={() => { return <p>gallery boye</p> }} />
+
+          <Route path='/detail/:id' component={({ match }) => {
+            return <DetailPane MovieId={match.params.id} OnPrevious={this.onPrevious} OnNext={this.onNext} />
+          }} />
+
+        </div>
+      </Router>
+    )
+  }
 }
 
 export default Home

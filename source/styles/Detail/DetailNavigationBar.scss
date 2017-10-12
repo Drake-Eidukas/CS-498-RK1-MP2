@@ -1,0 +1,11 @@
+// Dimensions
+$bar-height: 36px;
+
+// import colors
+@import '../colors';
+
+.description-navbar-box {
+    // height: $bar-height;
+    background: $white-smoke;
+    overflow: hidden;
+}

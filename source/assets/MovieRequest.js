@@ -5,8 +5,7 @@ class MovieRequest {
    * Instantiate the MovieFetcher with an API Key for the api, as well as a configuration object to instantiate axios with.
    * @param {string} apiKey API key to use with TMDB
    */
-  constructor (apiKey) {
-    console.log(apiKey)
+  constructor (apiKey = '70f874b8df6b617b38ea97652636d663') {
     this.params = {
       api_key: apiKey,
       language: 'en_us'
