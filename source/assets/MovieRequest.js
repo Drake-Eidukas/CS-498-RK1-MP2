@@ -6,6 +6,7 @@ class MovieRequest {
    * @param {string} apiKey API key to use with TMDB
    */
   constructor (apiKey) {
+    console.log(apiKey)
     this.params = {
       api_key: apiKey,
       language: 'en_us'
@@ -96,4 +97,4 @@ class MovieRequest {
   }
 }
 
-module.exports = MovieRequest
+export default MovieRequest

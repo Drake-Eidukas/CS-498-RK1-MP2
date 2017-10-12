@@ -1,3 +1,7 @@
+// Dimensions
+$bar-height: 36px;
+
+
 // Colors
 $white: #FFFFFF;
 $white-smoke: 	#F5F5F5;
@@ -11,6 +15,8 @@ $selected-pastel-navy: #283342;
 $background-pastel-navy: #232f3e;
 $selected-orange: #f8991d;
 
-body {
-    background: $background-pastel-navy;
+
+.description-navbar-box {
+    height: $bar-height;
+    background: $white-smoke;
 }
