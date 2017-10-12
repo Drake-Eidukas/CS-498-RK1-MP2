@@ -7,8 +7,16 @@ import styles from './Home.scss'
 import MovieFetcher from '../../assets/MovieFetcher'
 import Details from '../Detail/Details.jsx'
 import DetailNavigationBar from '../Detail/DetailNavigationBar.jsx'
+import { Genres } from '../../assets/Genres'
 
 class Home extends Component {
+  render () {
+    let m = new MovieFetcher('70f874b8df6b617b38ea97652636d663')
+    m.getMovieById(211672).then((response) => {
+      console.log(response)
+    }).catch((err) => {
+      console.log(err)
+    })
 
     render() {
 //         let m = new MovieFetcher('70f874b8df6b617b38ea97652636d663', {
