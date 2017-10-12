@@ -15,9 +15,12 @@ class Home extends Component {
         let m = new MovieRequest('70f874b8df6b617b38ea97652636d663')
 
         m.getMovieById(211672).then((response) => {
-        console.log(response)
+            this.title = response.data.original_title
+            this.description = response.data.overview
+            this.imagesrc = response.data.
+            console.log(response)
         }).catch((err) => {
-        console.log(err)
+            console.log(err)
         })
 
         return (
