@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import 'semantic-ui-css/semantic.min.css';
+import 'semantic-ui-css/semantic.min.css'
+import { Button } from 'semantic-ui-react'
+import styles from './DetailNavigationBar.scss'
 
 class DetailNavigationBar extends Component {
     constructor (props) {
@@ -10,20 +12,16 @@ class DetailNavigationBar extends Component {
     render () {
         return (
             <div className="description-navbar-box">
-                <button className="ui labeled icon left floated button">
-                    <i className="left arrow icon"></i>
-                    Previous
-                </button>
-
-                <button className="ui right labeled icon right floated button">
-                    <i className="right arrow icon"></i>
-                    Next
-                </button>
-
-
+                <Button content='Previous' icon='arrow left' labelPosition='left' floated='left' onClick={this.props.OnPrevious()} />
+                <Button content='Next' icon='arrow right' labelPosition='right' floated='right' onClick={this.props.OnNext()} />
             </div>
         )
     }
+}
+
+DetailNavigationBar.PropTypes = {
+    OnPrevious: PropTypes.func.isRequired,
+    OnNext: PropTypes.func.isRequired
 }
 
 export default DetailNavigationBar
