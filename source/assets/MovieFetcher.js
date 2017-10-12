@@ -1,32 +1,99 @@
-var axios = require('axios')
+import Axios from 'axios'
 
-class MovieFetcher {
-    /**
-     * Instantiate the MovieFetcher with an API Key for the api, as well as a configuration object to instantiate axios with. 
-     * @param {string} apiKey 
-     * @param {Object} axiosConfiguration 
-     */
-    constructor (apiKey, axiosConfiguration) {
-        this.apiKey = apiKey; 
-        this.instance = axios.create(configuration);
+class MovieRequest {
+  /**
+   * Instantiate the MovieFetcher with an API Key for the api, as well as a configuration object to instantiate axios with.
+   * @param {string} apiKey API key to use with TMDB
+   */
+  constructor (apiKey) {
+    this.params = {
+      api_key: apiKey,
+      language: 'en_us'
     }
 
-    /**
-     * Takes in parameters for the API Request to search the api with. 
-     * Params may take any of the values from within https://developers.themoviedb.org/3/search/search-movies
-     * @param {*} params 
-     */
-    searchMovies(params) {
-
-        params.api_key = this.apiKey;
-        let p = {
-            params: params
-        }
-
-        this.instance.request(p).then((res) => {
-            console.log(res)
-        });    
+    this.configuration = {
+      baseURL: 'https://api.themoviedb.org/3'
     }
+  }
+
+  method (method) {
+    this.configuration.method = method
+
+    return this
+  }
+
+  headers (headers) {
+    this.configuration.headers = headers
+
+    return this
+  }
+
+  data (data) {
+    this.configuration.data = data
+
+    return this
+  }
+
+  timeout (timeout) {
+    this.configuration.timeout = timeout
+
+    return this
+  }
+
+  responseType (responseType) {
+    this.configuration.responseType = responseType
+
+    return this
+  }
+
+  maxContentLength (maxContentLength) {
+    this.configuration.maxContentLength = maxContentLength
+
+    return this
+  }
+
+  maxRedirects (maxRedirects) {
+    this.configuration.maxRedirects = maxRedirects
+
+    return this
+  }
+
+  searchMovies (params) {
+    return this._makeRequest(params, '/search')
+  }
+
+  discoverMovies (params) {
+    return this._makeRequest(params, '/discover')
+  }
+
+  getMovieById (id) {
+    return this._makeRequest({}, `/movie/${id}`)
+  }
+
+  _makeRequest (params, url) {
+    let config = this.configuration
+    config.params = this._mergeParams(params)
+    config.url = url
+
+    return Axios(config)
+  }
+
+  /**
+   * Given some params to use in a request, creates a params object to use in the request.
+   * @param {any} toMerge Params object to merge in.
+   * @memberOf MovieRequest
+   */
+  _mergeParams (toMerge) {
+    let newParams = this.params
+
+    for (let key in toMerge) {
+      if (toMerge.hasOwnProperty(key)) {
+        newParams[key] = toMerge[key]
+      }
+    }
+
+    return newParams
+  }
 }
 
-module.exports = MovieFetcher;
+module.exports = MovieRequest
