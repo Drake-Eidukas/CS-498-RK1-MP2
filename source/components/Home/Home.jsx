@@ -25,11 +25,11 @@ class Home extends Component {
   }
 
   onNext (id) {
-    window.location.href = `/#/detail/${parseInt(id) + 1}`
+    
   }
 
   onPrevious (id) {
-    window.location.href = `/#/detail/${parseInt(id) - 1}`
+    
   }
 
   onNewIds (ids) {
