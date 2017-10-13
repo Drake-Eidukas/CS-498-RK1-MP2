@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
+import { Button, Divider, Segment } from 'semantic-ui-react'
 
 import {
   HashRouter as Router,
@@ -12,6 +12,7 @@ import styles from '../../styles/Home/Home.scss'
 
 import Genres from '../../assets/Genres'
 import DetailPane from '../Detail/DetailPane.jsx'
+import GalleryPane from '../Gallery/GalleryPane.jsx'
 
 class Home extends Component {
   constructor (props) {
@@ -23,30 +24,21 @@ class Home extends Component {
 
     this.onNext = this.onNext.bind(this)
     this.onPrevious = this.onPrevious.bind(this)
+    this.onNewIds = this.onNewIds.bind(this)
   }
 
   onNext (id) {
-    let currIndex = this.state.movieIdList.indexOf(parseInt(id))
-
-    if (currIndex === -1) {
-      window.location.href = '/search'
-    } else {
-      window.location.href = `/#/detail/${this.state.movieIdList[(currIndex + 1) % this.state.movieIdList.length]}`
-    }
+    window.location.href = `/#/detail/${parseInt(id) + 1}`    
   }
 
   onPrevious (id) {
-    let currIndex = this.state.movieIdList.indexOf(parseInt(id))
-    
-    if (currIndex === -1) {
-      window.location.href = '/search'
-      return 
-    } else if (currIndex === 0) {
-      currIndex = this.state.movieIdList.length - 1
-    } else {
-      currIndex -= 1
-    }
-      window.location.href = `/#/detail/${this.state.movieIdList[currIndex]}`
+    window.location.href = `/#/detail/${parseInt(id) - 1}`    
+  }
+
+  onNewIds (ids) {
+    this.setState({
+      movieIdList: ids
+    })
   }
 
   render () {
@@ -54,21 +46,26 @@ class Home extends Component {
       <Router className='routing-pane'>
         <div className='Home'>
 
-          <Button.Group labeled fluid>
-            <Button icon='search' content='Search' size='massive' as={Link} to='/search' />
-            <Button icon='grid layout' content='Gallery' size='massive' as={Link} to={'/gallery'} />
-          </Button.Group>
+          <Segment>
+            <Button.Group labeled fluid>
+              <Button icon='search' content='Search' size='massive' as={Link} to='/search' />
+              <Button icon='grid layout' content='Gallery' size='massive' as={Link} to={'/gallery'} />
+            </Button.Group>
 
-          <Route exact path='/' render={()=>{
-            return <Redirect to='/search'/>
-          }} />
-          <Route path='/search' component={() => { return <p>searchy boye</p> }} />
+            <Divider section />
 
-          <Route path='/gallery' component={() => { return <p>gallery boye</p> }} />
+            <Route exact path='/' render={() => {
+              return <Redirect to='/search' />
+            }} />
 
-          <Route path='/detail/:id' component={({ match }) => {
-            return <DetailPane MovieId={match.params.id} OnPrevious={this.onPrevious} OnNext={this.onNext} />
-          }} />
+            <Route path='/search' render={() => { return <p>searchy boye</p> }} />
+
+            <Route path='/gallery' render={() => { return <GalleryPane OnNewIds={this.onNewIds} MovieIds={this.state.movieIdList} /> }} />
+
+            <Route path='/detail/:id' render={({ match }) => {
+              return <DetailPane MovieId={match.params.id} OnPrevious={this.onPrevious} OnNext={this.onNext} />
+            }} />
+          </Segment>
 
         </div>
       </Router>

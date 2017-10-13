@@ -39,6 +39,10 @@ class DiscoverParamsBuilder {
   }
 
   page (page) {
+    if (!page || page < 1) {
+      return this.page(1)
+    }
+
     this.params['page'] = page
 
     return this
@@ -47,6 +51,17 @@ class DiscoverParamsBuilder {
   includeAdult (includeAdult) {
     this.params['include_adult'] = includeAdult
 
+    return this
+  }
+
+  withGenres (genres) {
+    if (!genres) {
+      return this
+    } else if (genres.length === 0) {
+      return this
+    }
+
+    this.params['with_genres'] = genres.join(',')
     return this
   }
 
