@@ -59,7 +59,7 @@ class MovieRequest {
   }
 
   searchMovies (params) {
-    return this._makeRequest(params, '/search')
+    return this._makeRequest(params, '/search/movie')
   }
 
   discoverMovies (params) {

@@ -17,11 +17,7 @@ class GallerySearchPane extends Component {
 
     this.props.OnDataChange(this.state)
   }
-
-  shouldComponentUpdate () {
-    return false
-  }
-
+  
   render () {
     return (
       <div className='gallery-search-pane'>

@@ -7,6 +7,12 @@ var sortTypes = [
   { key: 'vote_count', text: 'Vote Count', value: 'vote_count' }
 ]
 
+var smallerSortTypes = [
+  { key: 'popularity', text: 'Popularity', value: 'popularity' },
+  { key: 'release_date', text: 'Release Date', value: 'release_date' },
+  { key: 'original_title', text: 'Alphabetically by Title', value: 'original_title' }
+]
+
 var directionTypes = [
   {key: 'ascending', text: 'Ascending', value: 'ascending'},
   {key: 'descending', text: 'Descending', value: 'descending'}
@@ -28,5 +34,6 @@ var pageTypes = [
 module.exports = {
   SortTypes: sortTypes,
   DirectionTypes: directionTypes,
-  PageTypes: pageTypes
+  PageTypes: pageTypes,
+  SmallSortTypes: smallerSortTypes
 }
