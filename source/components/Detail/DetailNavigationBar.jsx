@@ -16,10 +16,11 @@ class DetailNavigationBar extends Component {
   }
 
   render () {
+    console.log(window.location)
     return (
       <div className='description-navbar-box'>
-        <Button content='Previous' icon='arrow left' labelPosition='left' floated='left' onClick={this.props.OnPrevious} size='big' as={Link} to={`/detail/${Math.max(parseInt(this.props.MovieId) - 1, 0)}`} />
-        <Button content='Next' icon='arrow right' labelPosition='right' floated='right' onClick={this.props.OnNext} size='big' as={Link} to={`/detail/${parseInt(this.props.MovieId) + 1}`} />
+        <Button content='Previous' icon='arrow left' labelPosition='left' floated='left' onClick={this.props.OnPrevious} size='big' as={Link} to={`${window.location.pathname}detail/${Math.max(parseInt(this.props.MovieId) - 1, 0)}`} />
+        <Button content='Next' icon='arrow right' labelPosition='right' floated='right' onClick={this.props.OnNext} size='big' as={Link} to={`${window.location.pathname}detail/${parseInt(this.props.MovieId) + 1}`} />
       </div>
     )
   }
