@@ -51,6 +51,10 @@ class Home extends Component {
 
             <Divider section />
 
+            <Route exact path='' render={() => {
+              return <Redirect to='/search' />
+            }} />
+
             <Route exact path='/' render={() => {
               return <Redirect to='/search' />
             }} />
