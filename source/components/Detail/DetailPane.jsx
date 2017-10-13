@@ -42,7 +42,7 @@ class DetailPane extends Component {
   render () {
     return (
       <div className='detail-pane'>
-        <DetailNavigationBar OnNext={() => { this.props.OnNext(this.props.MovieId) }} OnPrevious={() => { this.props.OnPrevious(this.props.MovieId) }} />
+        <DetailNavigationBar MovieId={this.props.MovieId}  OnNext={() => { this.props.OnNext(this.props.MovieId) }} OnPrevious={() => { this.props.OnPrevious(this.props.MovieId) }} />
         <Details MovieDescription={this.state.description} MovieTitle={this.state.title} MovieImageSrc={this.state.posterSrc} />
       </div>
     )
