@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Divider, Segment } from 'semantic-ui-react'
 
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Link,
   Redirect
